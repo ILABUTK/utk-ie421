@@ -106,7 +106,7 @@ $scope.test = function() {
 };
 
 $scope.saveUser = function() {
-  $scope.users.push({id: 7, fName: $scope.fName, lName:$scope.lName});
+  $scope.users.push({id: $scope.users.id +1, fName: $scope.fName, lName:$scope.lName});
 };
 
 });

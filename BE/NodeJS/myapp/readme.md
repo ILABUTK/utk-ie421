@@ -15,6 +15,7 @@ $npm start
 
 
 $npm install -g nodemon
+$nodemon
 
 - FE:: Put front end code in the /public folder
 
