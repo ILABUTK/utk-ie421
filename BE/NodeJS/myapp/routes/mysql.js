@@ -25,6 +25,16 @@ router.get('/student', function(req, res, next) {
   });
 });
 
+/* GET users listing. */
+router.get('/doctors', function(req, res, next) {
+  con.query("SELECT * FROM xli27.q2_doctor", function (err, result, fields) {
+    if (err) throw err;
+    // console.log(result);
+    res.send(result);
+    //res.send('MySQL::Got Data!');
+  });
+});
+
 /* Post student data. */
 router.post('/student', function(req, res, next) {
   var sql = con.query("INSERT INTO xli27.student set ? ", req.body, function (err, result, fields) {
@@ -36,7 +46,7 @@ router.post('/student', function(req, res, next) {
   });
 });
 
-/*GET customers*/
+/*GET customers*/ 
 router.get('/customer', function(req, res, next) {
   con.query("SELECT * FROM xli27.customer", function (err, result, fields) {
     if (err) throw err;
