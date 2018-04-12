@@ -31,7 +31,8 @@ router.post('/student', function(req, res, next) {
     if (err) throw err;
     
     console.log(sql);
-    res.send(result);
+    // res.send(result);
+    res.json({"status": "OK"}); // your own
   });
 });
 
