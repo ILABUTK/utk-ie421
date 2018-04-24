@@ -121,11 +121,12 @@
   <div ng-init="show()">
     <table class="table">
       <tr>
-        <td>UTID</td><td>NAME</td>
+        <td>UTID</td><td>NAME</td><td>ACTION</td>
       </tr>
       <tr ng-repeat="x in names">
         <td>{{ x.utid }}</td>
         <td>{{ x.student_name }}</td>
+        <td><button class="btn" ng-click="delete(x.id)">X</button></td>
       </tr>
     </table>
   </div>
@@ -258,6 +259,22 @@ app.controller('crud_controller', function($scope, $http) {
     }, function myError(response) {
       $scope.login_status = 'Ooops! Error!';
     });
+  };
+
+  $scope.remove = function (x) {
+    $scope.names.splice(x, 1);
+  }
+  
+  // delete
+  $scope.delete = function (x) {
+      // $scope.names.splice(x, 1);
+      $http.post("mysql/delete", {"id": x})
+        .then(function (response) {
+            if (response.data)
+              $scope.c_status = 'Record deleted!';
+        }, function myError(response) {
+          $scope.c_status = 'Ooops! Error!';
+        });
   };
 
   $scope.agImage = "images/bird.jpg";

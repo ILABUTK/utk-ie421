@@ -94,6 +94,23 @@ router.post('/login', function(req, res, next) {
   });
 });
 
+/* delete */
+router.post('/delete', function(req, res, next) {
+  var id =  req.body.id;
+  var stmt =  "DELETE FROM xli27.student where  id =  " + id;
+  var sql = con.query( stmt, function (err, result, fields) {
+    if (err) {
+      // throw err;
+      console.log(sql);
+      res.sendStatus(400); // send an error 
+    } else{
+      console.log(sql);
+      res.sendStatus(200);
+    }    
+    // res.send(result);
+  });
+});
+
 /*GET customers*/ 
 router.get('/customer', function(req, res, next) {
   con.query("SELECT * FROM xli27.customer", function (err, result, fields) {
