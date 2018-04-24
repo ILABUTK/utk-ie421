@@ -86,7 +86,6 @@ router.post('/login', function(req, res, next) {
           res.send(result);
         else
           res.sendStatus(401);
-        // res.sendStatus(200);
       } else {
         res.sendStatus(401);
       }

@@ -189,6 +189,13 @@
   <h3>{{login_status}}</h3>
 </div>
 
+<hr />
+<!--  demo:: "dynamic images" -->
+<div class="container-fluid bg-2 text-center">
+  <h3 class="margin">Demo of load a dynamic image! </h3>
+  <img ng-src="{{agImage}}" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
+</div>
+
 </div></div>
 
 <!-- Footer -->
@@ -251,6 +258,8 @@ app.controller('crud_controller', function($scope, $http) {
       $scope.login_status = 'Ooops! Error!';
     });
   };
+
+  $scope.agImage = "images/bird.jpg";
 
 });
 
