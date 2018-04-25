@@ -126,6 +126,7 @@
       <tr ng-repeat="x in names">
         <td>{{ x.utid }}</td>
         <td>{{ x.student_name }}</td>
+        <td><img ng-src="{{x.photo}}" class="img-responsive img-circle" style="display:inline" alt="Me" width="35" height="35"></td>
         <td>
           <button class="btn" ng-click="delete($index, x.id)">X</button>
           <button class="btn" ng-click="edit($index, x.id)">E</button>
