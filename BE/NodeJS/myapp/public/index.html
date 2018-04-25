@@ -126,7 +126,10 @@
       <tr ng-repeat="x in names">
         <td>{{ x.utid }}</td>
         <td>{{ x.student_name }}</td>
-        <td><button class="btn" ng-click="delete(x.id)">X</button></td>
+        <td>
+          <button class="btn" ng-click="delete($index, x.id)">X</button>
+          <button class="btn" ng-click="edit($index, x.id)">E</button>
+        </td>
       </tr>
     </table>
   </div>
@@ -149,6 +152,24 @@
     </form>
     <p>utid:{{utid}} <br>name:{{student_name}} </p>
     <h3>{{r_status}}</h3>
+  </div>  
+</div>
+
+<hr />
+
+<div class="container-fluid bg-1 text-center" id="crud_e">
+  <h3 class="margin">Demo of "U": Edit Data</h3>
+  <div>
+    <form class="form-group">
+      <input type="hidden" class="form-control" ng-model="e_id">
+      UTID:<br>
+      <input type="number" class="form-control" ng-model="e_utid" required><br>
+      Name:<br>
+      <input type="text" class="form-control" ng-model="e_student_name" required>
+      <br><br>
+      <button type="submit" class="btn btn-default" ng-click="update()">update</button>
+    </form>
+    <h3>{{e_status}}</h3>
   </div>  
 </div>
 
@@ -194,7 +215,7 @@
 <hr />
 <!--  demo:: "dynamic images" -->
 <div class="container-fluid bg-2 text-center">
-  <h3 class="margin">Demo of load a dynamic image! </h3>
+  <h3 class="margin">Demo of loading a dynamic image! </h3>
   <img ng-src="{{agImage}}" class="img-responsive img-circle margin" style="display:inline" alt="Bird" width="350" height="350">
 </div>
 
@@ -266,14 +287,32 @@ app.controller('crud_controller', function($scope, $http) {
   }
   
   // delete
-  $scope.delete = function (x) {
-      // $scope.names.splice(x, 1);
+  $scope.delete = function (index, x) {
+      $scope.names.splice(index, 1);
       $http.post("mysql/delete", {"id": x})
         .then(function (response) {
             if (response.data)
               $scope.c_status = 'Record deleted!';
         }, function myError(response) {
           $scope.c_status = 'Ooops! Error!';
+        });
+  };
+
+  // edit
+  $scope.edit = function (index, x) {
+      $scope.e_id = $scope.names[index].id;
+      $scope.e_utid = $scope.names[index].utid;
+      $scope.e_student_name = $scope.names[index].student_name;;        
+  };
+
+  // update
+  $scope.update = function () {
+      $http.post("mysql/update", {"id": $scope.e_id, "utid": $scope.e_utid, "student_name": $scope.e_student_name})
+        .then(function (response) {
+            if (response.data)
+              $scope.e_status = 'Record update!';
+        }, function myError(response) {
+          $scope.e_status = 'Ooops! Error!';
         });
   };
 

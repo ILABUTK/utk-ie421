@@ -46,7 +46,7 @@ router.post('/student', function(req, res, next) {
   var sql = con.query("INSERT INTO xli27.student set ? ", req.body, function (err, result, fields) {
     if (err) {
       //throw err;
-      res.send(400); // send an error 
+      res.sendStatus(400); // send an error 
     } else {      
       console.log(sql);
       // res.send(result);
@@ -108,6 +108,24 @@ router.post('/delete', function(req, res, next) {
       res.sendStatus(200);
     }    
     // res.send(result);
+  });
+});
+
+/* Update student data. */
+router.post('/update', function(req, res, next) {
+  var stmt = "UPDATE xli27.student set utid=" + req.body.utid 
+    + " and student_name='" + req.body.student_name  
+    + "' WHERE id = " + req.body.id;
+  var sql = con.query(stmt, function (err, result, fields) {
+    if (err) {
+      //throw err;
+      console.log(sql);
+      res.sendStatus(400); // send an error 
+    } else {      
+      console.log(sql);
+      // res.send(result);
+      res.json({"status": "OK"}); // your own code
+    }
   });
 });
 
