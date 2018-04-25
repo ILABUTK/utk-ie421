@@ -114,7 +114,7 @@ router.post('/delete', function(req, res, next) {
 /* Update student data. */
 router.post('/update', function(req, res, next) {
   var stmt = "UPDATE xli27.student set utid=" + req.body.utid 
-    + " and student_name='" + req.body.student_name  
+    + ",  student_name='" + req.body.student_name  
     + "' WHERE id = " + req.body.id;
   var sql = con.query(stmt, function (err, result, fields) {
     if (err) {
